@@ -43,7 +43,7 @@ Data extraction and structured JSON mapping: Once text or visuals are acquired, 
 The problem statement suggested using any language (Node.js/Python). As a MERN Stack developer, I chose to build the core API using Node.js for performance. To perfectly comply with the reference document's requested file structure for automated grading, I have included placeholder main.py and requirements.txt files that bridge directly to the Node.js runtime.
 
 ## AI Tools Used
-Gemini 3 Flash (via Web Interface): Used strictly as a minor support tool for basic documentation drafting, syntax checking, and learning the fundamentals and implementation of the Tesseract OCR library. 
+Gemini 3 Flash (via Web Interface): Used strictly as a minor support tool for basic documentation drafting, syntax checking, and learning the fundamentals and implementation of the Tesseract OCR library and mammoth library . 
 
 Gemini 2.5 Flash (via API): Integrated as the backend LLM engine to perform the automated document analysis functions.
 
