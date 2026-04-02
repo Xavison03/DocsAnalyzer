@@ -23,6 +23,7 @@ This API is an intelligent document processing system designed to extract, analy
   PORT=10000
 4.Run the application:
   node src/server.js
+
 ## Approach
 
 To ensure layout preservation and pinpoint accuracy while respecting the required technical stack guidelines, this solution utilizes a strategic hybrid workflow.
@@ -40,3 +41,15 @@ Fallback for DOCX: Since Gemini does not process raw Microsoft Word XML directly
 Data extraction and structured JSON mapping: Once text or visuals are acquired, we execute Gemini's controlled JSON schema output (responseSchema) forcing the AI to return a specific payload featuring a 1-sentence summary, mapped arrays for entities (names, dates, organizations, amounts), and locked sentiment labels ("Positive", "Negative", or "Neutral").
 
 The problem statement suggested using any language (Node.js/Python). As a MERN Stack developer, I chose to build the core API using Node.js for performance. To perfectly comply with the reference document's requested file structure for automated grading, I have included placeholder main.py and requirements.txt files that bridge directly to the Node.js runtime.
+
+## AI Tools Used
+Gemini 3 Flash (via Web Interface): Used strictly as a minor support tool for basic documentation drafting, syntax checking, and learning the fundamentals and implementation of the Tesseract OCR library. 
+
+Gemini 2.5 Flash (via API): Integrated as the backend LLM engine to perform the automated document analysis functions.
+
+## Known Limitations
+Free Tier Wake-up Delay: Hosted on Render's free tier, the server will spin down after 15 minutes of inactivity. The very first request may take up to 50 seconds to respond as the instance spins back up.
+
+Tesseract Native Binary Dependency: The Tesseract OCR engine depends on local Linux binary access. If deployed in highly restricted or pure serverless environments where Tesseract cannot run, the system will fall back to Gemini's native visual processing.
+
+Base64 Payload Size Limits: Extremely large files converted to Base64 strings can exceed normal HTTP payload limits or cause memory overhead on lightweight cloud instances.
