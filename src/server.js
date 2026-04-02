@@ -130,7 +130,7 @@ app.post('/api/document-analyze', async (req, res) => {
 
 // Bind server to 0.0.0.0 for Render cloud compatibility
 const PORT = process.env.PORT || 10000;
-app.listen(PORT, '0.0.0.0', () => console.log(`🚀 API active at port ${PORT}`));
+ const server=app.listen(PORT, '0.0.0.0', () => console.log(`🚀 API active at port ${PORT}`));
 
 // Force the server to allow requests to run up to 2 minutes (120,000 ms) before timing out
 server.timeout = 120000;
