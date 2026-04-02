@@ -1,5 +1,7 @@
 # Data Extraction API
 
+[View GitHub Repository](https://github.com/Xavison03/DocsAnalyzer)
+
 ## Description
 This API is an intelligent document processing system designed to extract, analyze, and summarize content from various file formats (PDF, DOCX, and images). Instead of separating the optical character recognition (OCR) and text analysis into heavy independent steps, this solution takes a modern multimodal approach to analyze layout and content natively without caching or saving files locally.
 
@@ -11,7 +13,7 @@ This API is an intelligent document processing system designed to extract, analy
 ## Setup Instructions
 1. Clone the repository:
    ```bash
-   git clone <your-github-repo-url>
+  git clone [https://github.com/Xavison03/DocsAnalyzer.git]
   ```
 2.Install dependencies:
      npm install 
