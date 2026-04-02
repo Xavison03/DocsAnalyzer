@@ -1,0 +1,1 @@
+# No python dependencies needed, project uses Node.js so have look on the package.json
