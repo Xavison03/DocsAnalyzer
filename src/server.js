@@ -27,8 +27,8 @@ app.post('/api/document-analyze', async (req, res) => {
     const { fileName, fileType, fileBase64 } = req.body;
 
     // Validation for missing payload
-    if (!fileBase64) {
-        return res.status(400).json({ status: "error", message: "Missing fileBase64" });
+    if (!fileBase64 || !fileName || !fileType) {
+        return res.status(400).json({ status: "error", message: "Missing required fields: fileName, fileType, or fileBase64" });
     }
 
     let extractedText = "";
