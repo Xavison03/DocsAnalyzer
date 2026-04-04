@@ -59,10 +59,12 @@ app.post('/api/document-analyze', async (req, res) => {
         mimeType = "image/heic";
     } else if (format === "heif") {
         mimeType = "image/heif";
+    }else if (format === "pdf") {
+        mimeType = "application/pdf";
     }
 
     // HANDLER FOR IMAGES (Satisfies the Tesseract requirement)
-    if (format === "png" || format === "jpg" || format === "jpeg") {
+  if (format === "png" || format === "jpg" || format === "jpeg" || format === "webp" || format === "heic" || format === "heif")  {
         console.log("Attempting Tesseract OCR for compliance...");
         try {
             const imageBuffer = Buffer.from(fileBase64, 'base64');
@@ -87,7 +89,7 @@ app.post('/api/document-analyze', async (req, res) => {
     if (useTextFallback) {
         // Sent to Gemini as clean text
         contentsPayload = [
-            { text: `Analyze the following extracted document text. Extract the summary, entities, and sentiment. 
+            { text: `Analyze the following extracted document text. Extract the summary, entities, and sentiment. Pay heavy attention to specific locations and economic sectors mentioned. 
             
             Document Text:
             ${extractedText}` }
@@ -96,7 +98,7 @@ app.post('/api/document-analyze', async (req, res) => {
         // Sent to Gemini as Multimodal vision
         contentsPayload = [
             { inlineData: { mimeType, data: fileBase64 } },
-            { text: "Analyze this document image or PDF. Extract the summary, entities, and sentiment." }
+            { text: "Analyze this document image or PDF. Extract the summary, entities, and sentiment. Pay heavy attention to specific locations and economic sectors mentioned." }
         ];
     }
 
@@ -118,9 +120,11 @@ app.post('/api/document-analyze', async (req, res) => {
                 names: { type: "ARRAY", items: { type: "STRING" } },
                 dates: { type: "ARRAY", items: { type: "STRING" } },
                 organizations: { type: "ARRAY", items: { type: "STRING" } },
-                amounts: { type: "ARRAY", items: { type: "STRING" } }
+                amounts: { type: "ARRAY", items: { type: "STRING" } },
+                locations: { type: "ARRAY", items: { type: "STRING" } }, 
+                sectors: { type: "ARRAY", items: { type: "STRING" } }
               },
-              required: ["names", "dates", "organizations", "amounts"]
+              required: ["names", "dates", "organizations", "amounts", "locations", "sectors"]
             },
             sentiment: { type: "STRING" }
           },
